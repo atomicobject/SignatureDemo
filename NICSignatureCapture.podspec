@@ -12,6 +12,7 @@ Pod::Spec.new do |s|
   s.authors      = { "Jason Harwig" => "https://www.altamiracorp.com/profiles/jharwig" }
   s.source       = { :git => "https://github.com/jharwig/SignatureDemo.git" }
   s.ios.deployment_target = '5.0'
+  s.requires_arc = true
   s.frameworks  = 'UIKit'
   s.source_files = 'SignatureDemo/NICSignature*.{h,m}'
 end
