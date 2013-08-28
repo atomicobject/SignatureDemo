@@ -130,7 +130,9 @@ static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
         
         self.context = context;
         self.drawableDepthFormat = GLKViewDrawableDepthFormat24;
-		self.enableSetNeedsDisplay = YES;
+		    self.enableSetNeedsDisplay = YES;
+        CAEAGLLayer *eaglLayer = (CAEAGLLayer *)self.layer;
+        eaglLayer.opaque = NO;
         
         // Turn on antialiasing
         self.drawableMultisample = GLKViewDrawableMultisample4X;
@@ -147,7 +149,7 @@ static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
         [self addGestureRecognizer:tap];
         
         // Erase with long press
-        [self addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)]];
+        /* [self addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)]]; */
 
     } else [NSException raise:@"NSOpenGLES2ContextException" format:@"Failed to create OpenGL ES2 context"];
 }
@@ -180,8 +182,8 @@ static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 
 - (void)drawRect:(CGRect)rect
 {
-    glClearColor(1, 1, 1, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClearColor(0, 0, 0, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     [effect prepareToDraw];
     
@@ -260,9 +262,9 @@ static NICSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 }
 
 
-- (void)longPress:(UILongPressGestureRecognizer *)lp {
-    [self erase];
-}
+/* - (void)longPress:(UILongPressGestureRecognizer *)lp { */
+/*     [self erase]; */
+/* } */
 
 - (void)pan:(UIPanGestureRecognizer *)p {
     
